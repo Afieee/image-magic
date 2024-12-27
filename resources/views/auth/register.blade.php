@@ -18,7 +18,7 @@
                     <h1>Imagic</h1>
                 </a>
             </div>
-            <form action="" method="POST">
+            <form action="/register-berhasil" method="POST">
                 @csrf
                 <div class="input-group">
                     <label for="name">Name</label>

@@ -15,7 +15,7 @@
 <body>
     <nav class="navigasi-bar">
         <a href="index.html" class="a-logo nav-items">
-            <img src="{{ asset('storage/images/logo_unikom.png') }}" alt="Logo Unikom" class="logo-brand">
+            <img src="{{ asset('storage/images/imagic_logo.png') }}" alt="Logo Unikom" class="logo-brand">
         </a>
 
         <a href="" class="nav-text nav-items">
