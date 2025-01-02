@@ -15,10 +15,10 @@ class UsersController extends Controller
             'name' => 'required|min:3|max:255',
             'email' => 'required',
             'password' => 'required|min:8|max:255'
-        ],[
+        ], [
             'name.required' => 'Nama harus diisi',
             'name.min' => 'Nama harus memiliki minimal 3 karakter',
-            
+
             'email.required' => 'Email harus diisi',
 
             'password.required' => 'Password harus diisi',
@@ -30,17 +30,16 @@ class UsersController extends Controller
         User::create($validateData);
 
         return redirect('/login')->with('success', 'Akun Berhasil Dibuat');
-    } 
-    
-    public function login(Request $request) 
+    }
+
+    public function login(Request $request)
     {
         $credentials = $request->validate([
             'email' => 'required',
             'password' => 'required'
         ]);
 
-        if(Auth::attempt($credentials))
-        {
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             $user = Auth::user();
             $request->session()->put('user', $user);
@@ -53,9 +52,31 @@ class UsersController extends Controller
         ]);
     }
 
+
+
+
+
     public function halamanHome(Request $request)
     {
         $user = $request->session()->get('user');
-        return view('home', ['user' => $user]);
+        $id = Auth::user()->id;
+        $username = Auth::user()->name;
+        $email = Auth::user()->email;
+
+        return view('home', [
+            'user' => $user,
+        ]);
+    }
+
+
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
     }
 }
